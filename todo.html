@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="app">
+        <div class="wrapper">
+            <div class="title">Todo List</div>
+
+            <div class="addbar">
+                <form action="">
+                    <input type="text" :autofocus="'autofocus'"  placeholder="Hi" v-model="addtitle"  >
+                    <input type="submit" value="ADD" @click.prevent="addtodo" >
+                </form>
+            </div>
+
+            
+
+            <div class="filterbar">
+                <ul class="filter-right">
+                    <a href="#"><li class="filters" @click="type='Compelet'">Compelet</li></a>
+                    <a href="#"><li class="filters" @click="type='Active'">Active</li></a>
+                    <a href="#"><li class="filters" @click="type='All'">All</li></a>
+                </ul>
+
+                <div class="filter-left">{{uncompeletnum}} unfinished</div>
+            </div>
+
+            <div class="list-warp">
+                <div class="list-warper" v-for="(todo,index) in filters" :key="todo.id">
+                    <div class="line"></div>
+                    <div class="list">
+                        <a href="#" @click="todo.compelet = !todo.compelet"><div class="delete"><i :class="todo.compelet ? 'fa-solid fa-check ': 'fa-solid fa-x'"></i></div></a>
+                            <div class="list-title" :class="todo.compelet ? 'yet': ''">{{todo.title}}</div>
+                            <div class="edittitle" v-if="todo.editing"> 
+                                <input type="text" :ref="`${todo}`" v-model="newtitle" @blur.prevent="updatetitle(todo)" > 
+                            </div>
+                            <a href="#"  @click="editer(todo,index)"><div class="edit" ><i class="fa-solid fa-pen"></i></div></a>
+                            <a href="#" @click="canceltodo(index)"><div class="delete"><i class="fa-solid fa-trash-can"></i></div></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+            return {
+                addtitle:'',
+                newtitle:'',
+                compelet:'',
+                type:'All',
+
+                todos:[
+                    {id: 0, title: '睡覺', compelet: true, editing: false},
+                    {id: 1, title: '吃吃', compelet: false, editing: false},
+                ],
+            }
+        },
+
+        methods:{
+
+            addtodo(){
+
+                if(this.addtitle){
+                    let id = this.todos.length
+                    let title = this.addtitle
+                    let arr = {id, title, compelet:false}
+                    this.todos.push(arr)
+                    this.addtitle=''
+                }
+                
+            },
+
+            canceltodo(index){
+                this.todos.splice(index,1)
+            },
+            
+            editer(todo,index){
+                todo.editing = !todo.editing
+                this.newtitle = this.todos[index].title
+                console.log(this.newtitle)
+
+                //$nextTick 為 DOM更新的 hook
+                this.$nextTick(()=>{
+                    // $refs 訪問 dom 組件
+                    this.$refs[`${todo}`][0].focus()
+                })
+            },
+                
+            updatetitle(todo){
+                todo.title = this.newtitle
+                todo.editing = !todo.editing
+            }
+            
+
+        },
+        
+
+        computed:{
+            filters(){
+                if(this.type == 'All'){
+                    return this.todos
+                }else if(this.type == 'Active'){
+                    return this.todos.filter(todo => !todo.compelet)
+                }else{
+                    return this.todos.filter(todo => todo.compelet)
+                }
+            },
+
+            uncompeletnum(){
+                return this.todos.filter(todo => !todo.compelet).length
+            }
+        },
+        
+    }).mount('#app')
+    </script>
+</body>
+</html>
