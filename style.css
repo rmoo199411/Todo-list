@@ -243,13 +243,14 @@ body {
   width: 70%;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 @media screen and (max-width: 600px) {
   .wrapper .list-warp .list-warper .list .list-title {
     width: 50%;
     text-overflow: ellipsis;
     white-space: nowrap;
-    cursor: pointer;
+    -webkit-overflow-scrolling: touch;
   }
 }
 .wrapper .list-warp .list-warper .list input {
