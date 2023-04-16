@@ -248,6 +248,7 @@ body {
 @media screen and (max-width: 600px) {
   .wrapper .list-warp .list-warper .list .list-title {
     width: 50%;
+    overflow: auto;
     text-overflow: ellipsis;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
