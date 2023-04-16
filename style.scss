@@ -259,7 +259,7 @@ body{
                     @media screen and (max-width: $screen600) {
                         width: 50%;
                         overflow: auto;
-                        text-overflow: ellipsis;
+                        text-overflow: clip;
                         white-space: nowrap;
                         -webkit-overflow-scrolling: touch;
                     }

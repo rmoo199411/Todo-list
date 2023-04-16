@@ -249,7 +249,7 @@ body {
   .wrapper .list-warp .list-warper .list .list-title {
     width: 50%;
     overflow: auto;
-    text-overflow: ellipsis;
+    text-overflow: clip;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
   }
