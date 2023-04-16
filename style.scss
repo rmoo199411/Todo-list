@@ -1,6 +1,21 @@
-$bt-color:#2e66cd;
+$bt-color:#064d2e;
+$bt-font: #fff;
 $bt-hover-color:#688dd3;
-$list: #be9307;
+$bt-height: 50px;
+$list: #ba9a32;
+$list-bt: 30px;
+$wrap-width: 600px;
+$wrap-main:480px;
+
+@mixin hovers{
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+@mixin inputs{
+    outline: none;
+    border: none;
+}
 
 @mixin center{
     display: flex;
@@ -12,6 +27,7 @@ $list: #be9307;
     margin: 0;
     padding: 0;
     list-style: none;
+    font-size: 18px;
     a{
         text-decoration: none;
     }
@@ -20,7 +36,7 @@ $list: #be9307;
 body{
     height: 100vh;
     font-family: FreeMono, monospace;
-    background-image: linear-gradient(to bottom, #04a06f, #020f3e);
+    background-image: linear-gradient(to bottom, #058c90, #040d2f);
     @include center;
 }
 
@@ -31,7 +47,7 @@ body{
 }
 
 .wrapper{
-    width: 400px;
+    width: $wrap-width;
     background-color: #0000005f;
     border-radius: 20px;
     padding-bottom: 20px;
@@ -39,89 +55,102 @@ body{
     @include center;
 
     .title{
-        height: 100px;
-        line-height: 100px;
+        height: 150px;
+        line-height: 150px;
         text-align: center;
-        font-size: 50px;
+        font-size: 70px;
         font-weight: 800;
-        letter-spacing: 3px;
-        font-family: OCR A Std, monospace;        
+        letter-spacing: 20px;      
         color: rgb(255, 162, 0);
     }
 
     .addbar{
-        width: 350px;
-        background-color: #be9307;
+        width: $wrap-main;
+        background-color: $list;
         border-radius: 15px 15px 0 0;
+
         @include center;
 
         form{
-            width: 350px;
-            height: 35px;
+            width: $wrap-main;
+            height: $bt-height;
             display: flex;
             justify-content: space-between;
             border-radius: 15px;
+            border: 3px solid #034737bb;
             background-color: #ffffffbb;
             margin-bottom: 10px;
 
             input[type="text"]{
-                width: 300px;
-                height: 35px;
-                font-size: 20px;
-                border: none;
+                width: calc(#{$wrap-main} - 100px);
+                height: $bt-height;
+                font-size: 25px;
+                letter-spacing: 3px;
                 border-radius: 15px;
                 background-color: #ffffff00;
                 padding-left: 30px;
-                outline: none;
+                @include inputs;
             }
 
             input[type="submit"]{
-                height: 35px;
-                width: 50px;
+                color: $bt-font;
+                height: $bt-height;
+                width: 100px;
                 border: none;
-                border-radius: 15px;
+                border-radius: 11px;
                 background-color: $bt-color;
                 @include center;
                 font-weight: 600;
 
                 &:hover{
                     background-color: $bt-hover-color;
+                    @include hovers;
                 }
             }
         }
     }
 
     .filterbar{
-        width: 350px;
-        height: 30px;
+        width: $wrap-main;
+        height: $bt-height;
         display: flex;
         align-items: center;
         justify-content: space-between;
         background-color: $list;
+        padding-bottom: 10px;
 
-
-        .filter-right{
+        .filter-left{
             display: flex;
             margin-left: 10px;
-            a{
-                padding: 3px;
+            .filters{
+                height: $bt-height;
+                line-height: $bt-height;
+                padding: 0 18px;
                 margin-left: 10px;
                 background-color: $bt-color;
                 border-radius: 15px;
-                color: rgb(0, 0, 0);
+                color: $bt-font;
 
                 &:hover{
                     background-color: $bt-hover-color;
+                    @include hovers;
                 }
             }
+            .select{
+                background-color: $bt-hover-color;
+            }
+            
         }
 
-        .filter-left{
+        .filter-right{
+            color: $bt-font;
             margin-right: 20px;
-            background-color: #ffffffac;
+            background-color: #4f4e4eac;
             border-radius: 5px;
-            padding: 2px 2px;
+            padding: 2px 6px;
         }
+
+        
     }
     .list-warp{
         background-color: $list;
@@ -129,18 +158,51 @@ body{
     
 
         .list-warper{
-            width: 350px;
+            width: $wrap-main;
             display: flex;
             flex-direction: column;
             align-items: center;
             
 
             .list{
-            display: flex;
-            justify-content: space-between;
-            
-            width: 300px;
-            background-color: $list;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: $bt-height;
+                line-height: $bt-height;
+                width: 80%;
+
+                a{
+                    width: $list-bt;
+                    height: $list-bt;
+                    background-color: #4f4e4eac;
+                    color: $bt-font;
+                    border-radius: 50%;
+                    @include center;
+
+                    &:hover{
+                        background-color: $bt-hover-color;
+                        @include hovers;
+                    }
+                }
+
+                .list-title{
+                    font-size: 20px;
+                    letter-spacing: 5px;
+                    width: 70%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                input{
+                    font-size: 20px;
+                    letter-spacing: 5px;
+                    width: 100%;
+                    background-color: #ffffff00;
+                    font-family: FreeMono, monospace;
+                    color: #ff0000;
+                    @include inputs;
+                }
             }
         }
     }

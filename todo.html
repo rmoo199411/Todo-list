@@ -12,37 +12,54 @@
     <div id="app">
         <div class="wrapper">
             <div class="title">Todo List</div>
-
+<!-- addbar -->
             <div class="addbar">
                 <form action="">
-                    <input type="text" :autofocus="'autofocus'"  placeholder="Hi" v-model="addtitle"  >
+                    <input type="text" :autofocus="'autofocus'"  
+                        placeholder="What do you want to do ?" 
+                        v-model="addtitle"  
+                        @keyup.enter="addtodo">
                     <input type="submit" value="ADD" @click.prevent="addtodo" >
                 </form>
             </div>
 
             
-
+<!-- filterbar -->
             <div class="filterbar">
-                <ul class="filter-right">
-                    <a href="#"><li class="filters" @click="type='Compelet'">Compelet</li></a>
-                    <a href="#"><li class="filters" @click="type='Active'">Active</li></a>
-                    <a href="#"><li class="filters" @click="type='All'">All</li></a>
+                <ul class="filter-left">
+                    <a href="#"><li :class="type == 'Compelet' ? 'filters select' :'filters'" @click="type='Compelet'">Compelet</li></a>
+                    <a href="#"><li :class="type == 'Active' ? 'filters select' :'filters'" @click="type='Active'">Active</li></a>
+                    <a href="#"><li :class="type == 'All' ? 'filters select' :'filters'" @click="type='All'">All</li></a>
                 </ul>
 
-                <div class="filter-left">{{uncompeletnum}} unfinished</div>
+                <div class="filter-right">{{uncompeletnum}} unfinished</div>
             </div>
-
+            
+<!-- list-warp -->
             <div class="list-warp">
                 <div class="list-warper" v-for="(todo,index) in filters" :key="todo.id">
                     <div class="line"></div>
+            <!-- list -->    
                     <div class="list">
-                        <a href="#" @click="todo.compelet = !todo.compelet"><div class="delete"><i :class="todo.compelet ? 'fa-solid fa-check ': 'fa-solid fa-x'"></i></div></a>
-                            <div class="list-title" :class="todo.compelet ? 'yet': ''">{{todo.title}}</div>
-                            <div class="edittitle" v-if="todo.editing"> 
-                                <input type="text" :ref="`${todo}`" v-model="newtitle" @blur.prevent="updatetitle(todo)" > 
+                        <a href="#" @click="todo.compelet = !todo.compelet">
+                            <div class="check">
+                                <i :class="todo.compelet ? 'fa-solid fa-check ': 'fa-solid fa-x'"></i>
                             </div>
-                            <a href="#"  @click="editer(todo,index)"><div class="edit" ><i class="fa-solid fa-pen"></i></div></a>
-                            <a href="#" @click="canceltodo(index)"><div class="delete"><i class="fa-solid fa-trash-can"></i></div></a>
+                        </a>
+                            <div class="list-title" @dblclick="editer(todo,index)" :class="todo.compelet ? 'yet': ''" v-show="!todo.editing" >{{todo.title}}</div>
+                            <div class="list-title" v-show="todo.editing" > 
+                                <input type="text" :ref="`${todo}`" v-model="todo.title" @keyup.esc="quitediter(todo)" @keyup.enter="editer(todo,index)"> 
+                            </div>
+                <!-- little bts  -->
+                            <a href="#"  @click="editer(todo,index)" v-show="!todo.editing">
+                                <div class="edit" ><i class="fa-solid fa-pen"></i></div>
+                            </a>
+                            <a href="#"  @click="editer(todo,index)" v-show="todo.editing" >
+                                <div class="edit" >OK</div>
+                            </a>
+                            <a href="#" @click="canceltodo(index)">
+                                <div class="delete"><i class="fa-solid fa-trash-can"></i></div>
+                            </a>
                     </div>
                     
                 </div>
@@ -50,80 +67,7 @@
         </div>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script>
-    const { createApp } = Vue
 
-    createApp({
-        data() {
-            return {
-                addtitle:'',
-                newtitle:'',
-                compelet:'',
-                type:'All',
-
-                todos:[
-                    {id: 0, title: '睡覺', compelet: true, editing: false},
-                    {id: 1, title: '吃吃', compelet: false, editing: false},
-                ],
-            }
-        },
-
-        methods:{
-
-            addtodo(){
-
-                if(this.addtitle){
-                    let id = this.todos.length
-                    let title = this.addtitle
-                    let arr = {id, title, compelet:false}
-                    this.todos.push(arr)
-                    this.addtitle=''
-                }
-                
-            },
-
-            canceltodo(index){
-                this.todos.splice(index,1)
-            },
-            
-            editer(todo,index){
-                todo.editing = !todo.editing
-                this.newtitle = this.todos[index].title
-                console.log(this.newtitle)
-
-                //$nextTick 為 DOM更新的 hook
-                this.$nextTick(()=>{
-                    // $refs 訪問 dom 組件
-                    this.$refs[`${todo}`][0].focus()
-                })
-            },
-                
-            updatetitle(todo){
-                todo.title = this.newtitle
-                todo.editing = !todo.editing
-            }
-            
-
-        },
-        
-
-        computed:{
-            filters(){
-                if(this.type == 'All'){
-                    return this.todos
-                }else if(this.type == 'Active'){
-                    return this.todos.filter(todo => !todo.compelet)
-                }else{
-                    return this.todos.filter(todo => todo.compelet)
-                }
-            },
-
-            uncompeletnum(){
-                return this.todos.filter(todo => !todo.compelet).length
-            }
-        },
-        
-    }).mount('#app')
-    </script>
+    <script src="./todo.js"></script>
 </body>
 </html>
