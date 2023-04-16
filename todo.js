@@ -9,8 +9,7 @@ const { createApp } = Vue
                 type:'All',
 
                 todos:[
-                    {id: 0, title: '睡覺', compelet: true, editing: false},
-                    {id: 1, title: '吃吃', compelet: false, editing: false},
+                    {id: 0, title: '逛街', compelet: true, editing: false},
                 ],
             }
         },

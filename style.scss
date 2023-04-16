@@ -7,6 +7,9 @@ $list-bt: 30px;
 $wrap-width: 600px;
 $wrap-main:480px;
 
+// rwd
+$screen600:600px;
+
 @mixin hovers{
     opacity: 1;
     transition: all 0.3s ease;
@@ -53,6 +56,10 @@ body{
     padding-bottom: 20px;
     flex-direction: column;
     @include center;
+    @media screen and (max-width: $screen600) {
+        border-radius: 0;
+        width: 100vw;
+    }
 
     .title{
         height: 150px;
@@ -62,14 +69,23 @@ body{
         font-weight: 800;
         letter-spacing: 20px;      
         color: rgb(255, 162, 0);
+
+        @media screen and (max-width: $screen600) {
+            height: 80px;
+            line-height: 80px;
+            font-size: 30px;
+        }
     }
 
     .addbar{
         width: $wrap-main;
         background-color: $list;
         border-radius: 15px 15px 0 0;
-
         @include center;
+        @media screen and (max-width: $screen600) {
+            width: 100vw;
+        }
+
 
         form{
             width: $wrap-main;
@@ -77,9 +93,18 @@ body{
             display: flex;
             justify-content: space-between;
             border-radius: 15px;
-            border: 3px solid #034737bb;
-            background-color: #ffffffbb;
+            border: 3px solid #196f5b;
+            background-color: #ffffff00;
             margin-bottom: 10px;
+            @media screen and (max-width: $screen600) {
+                width: 100vw;
+                border:none;
+                padding-top: 10px;
+                justify-content: none;
+                flex-direction: column;
+                height: 120px;
+                @include center;
+            }
 
             input[type="text"]{
                 width: calc(#{$wrap-main} - 100px);
@@ -90,6 +115,13 @@ body{
                 background-color: #ffffff00;
                 padding-left: 30px;
                 @include inputs;
+                @media screen and (max-width: $screen600) {
+                    font-size: 15px;
+                    background-color: #ffffff6a;
+                    height: 70px;
+                    width: 80%;
+                    margin-bottom: 10px;
+                }
             }
 
             input[type="submit"]{
@@ -101,6 +133,12 @@ body{
                 background-color: $bt-color;
                 @include center;
                 font-weight: 600;
+                @media screen and (max-width: $screen600) {
+                    width: 80%;
+                    font-size: 15px;
+                    height: 50px;
+
+                }
 
                 &:hover{
                     background-color: $bt-hover-color;
@@ -119,9 +157,20 @@ body{
         background-color: $list;
         padding-bottom: 10px;
 
+        @media screen and (max-width: $screen600) {
+            width: 100vw;
+            flex-direction: column;
+            height:auto;
+            justify-content: center;
+        }
+
         .filter-left{
             display: flex;
             margin-left: 10px;
+            @media screen and (max-width: $screen600) {
+                margin-bottom: 10px;
+            }
+
             .filters{
                 height: $bt-height;
                 line-height: $bt-height;
@@ -148,6 +197,11 @@ body{
             background-color: #4f4e4eac;
             border-radius: 5px;
             padding: 2px 6px;
+            @media screen and (max-width: $screen600) {
+                width: 80vw;
+                text-align: center;
+                border-radius: none;
+            }
         }
 
         
@@ -162,6 +216,10 @@ body{
             display: flex;
             flex-direction: column;
             align-items: center;
+            @media screen and (max-width: $screen600) {
+                width: 100vw;
+            }
+
             
 
             .list{
@@ -179,6 +237,10 @@ body{
                     color: $bt-font;
                     border-radius: 50%;
                     @include center;
+                    @media screen and (max-width: $screen600) {
+                        width: 40px;
+                        height: 40px;
+                    }
 
                     &:hover{
                         background-color: $bt-hover-color;
@@ -192,6 +254,10 @@ body{
                     width: 70%;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    @media screen and (max-width: $screen600) {
+                        width: 50%;
+                        text-align: center;
+                    }
                 }
 
                 input{
@@ -202,6 +268,10 @@ body{
                     font-family: FreeMono, monospace;
                     color: #ff0000;
                     @include inputs;
+                    @media screen and (max-width: $screen600) {
+                        width: 50%;
+                        text-align: center;
+                    }
                 }
             }
         }

@@ -33,6 +33,12 @@ body {
   align-items: center;
   justify-content: center;
 }
+@media screen and (max-width: 600px) {
+  .wrapper {
+    border-radius: 0;
+    width: 100vw;
+  }
+}
 .wrapper .title {
   height: 150px;
   line-height: 150px;
@@ -42,6 +48,13 @@ body {
   letter-spacing: 20px;
   color: rgb(255, 162, 0);
 }
+@media screen and (max-width: 600px) {
+  .wrapper .title {
+    height: 80px;
+    line-height: 80px;
+    font-size: 30px;
+  }
+}
 .wrapper .addbar {
   width: 480px;
   background-color: #ba9a32;
@@ -50,15 +63,33 @@ body {
   align-items: center;
   justify-content: center;
 }
+@media screen and (max-width: 600px) {
+  .wrapper .addbar {
+    width: 100vw;
+  }
+}
 .wrapper .addbar form {
   width: 480px;
   height: 50px;
   display: flex;
   justify-content: space-between;
   border-radius: 15px;
-  border: 3px solid rgba(3, 71, 55, 0.7333333333);
-  background-color: rgba(255, 255, 255, 0.7333333333);
+  border: 3px solid #196f5b;
+  background-color: rgba(255, 255, 255, 0);
   margin-bottom: 10px;
+}
+@media screen and (max-width: 600px) {
+  .wrapper .addbar form {
+    width: 100vw;
+    border: none;
+    padding-top: 10px;
+    justify-content: none;
+    flex-direction: column;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 .wrapper .addbar form input[type=text] {
   width: calc(480px - 100px);
@@ -71,6 +102,15 @@ body {
   outline: none;
   border: none;
 }
+@media screen and (max-width: 600px) {
+  .wrapper .addbar form input[type=text] {
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 0.4156862745);
+    height: 70px;
+    width: 80%;
+    margin-bottom: 10px;
+  }
+}
 .wrapper .addbar form input[type=submit] {
   color: #fff;
   height: 50px;
@@ -82,6 +122,13 @@ body {
   align-items: center;
   justify-content: center;
   font-weight: 600;
+}
+@media screen and (max-width: 600px) {
+  .wrapper .addbar form input[type=submit] {
+    width: 80%;
+    font-size: 15px;
+    height: 50px;
+  }
 }
 .wrapper .addbar form input[type=submit]:hover {
   background-color: #688dd3;
@@ -97,9 +144,22 @@ body {
   background-color: #ba9a32;
   padding-bottom: 10px;
 }
+@media screen and (max-width: 600px) {
+  .wrapper .filterbar {
+    width: 100vw;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+  }
+}
 .wrapper .filterbar .filter-left {
   display: flex;
   margin-left: 10px;
+}
+@media screen and (max-width: 600px) {
+  .wrapper .filterbar .filter-left {
+    margin-bottom: 10px;
+  }
 }
 .wrapper .filterbar .filter-left .filters {
   height: 50px;
@@ -125,6 +185,13 @@ body {
   border-radius: 5px;
   padding: 2px 6px;
 }
+@media screen and (max-width: 600px) {
+  .wrapper .filterbar .filter-right {
+    width: 80vw;
+    text-align: center;
+    border-radius: none;
+  }
+}
 .wrapper .list-warp {
   background-color: #ba9a32;
   border-radius: 0 0 20px 20px;
@@ -134,6 +201,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+@media screen and (max-width: 600px) {
+  .wrapper .list-warp .list-warper {
+    width: 100vw;
+  }
 }
 .wrapper .list-warp .list-warper .list {
   display: flex;
@@ -153,6 +225,12 @@ body {
   align-items: center;
   justify-content: center;
 }
+@media screen and (max-width: 600px) {
+  .wrapper .list-warp .list-warper .list a {
+    width: 40px;
+    height: 40px;
+  }
+}
 .wrapper .list-warp .list-warper .list a:hover {
   background-color: #688dd3;
   opacity: 1;
@@ -165,6 +243,12 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+@media screen and (max-width: 600px) {
+  .wrapper .list-warp .list-warper .list .list-title {
+    width: 50%;
+    text-align: center;
+  }
+}
 .wrapper .list-warp .list-warper .list input {
   font-size: 20px;
   letter-spacing: 5px;
@@ -174,6 +258,12 @@ body {
   color: #ff0000;
   outline: none;
   border: none;
+}
+@media screen and (max-width: 600px) {
+  .wrapper .list-warp .list-warper .list input {
+    width: 50%;
+    text-align: center;
+  }
 }
 .wrapper .yet {
   text-decoration: line-through;
